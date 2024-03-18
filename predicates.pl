@@ -6,9 +6,19 @@ list_orders(CustomerName, Orders) :- customer(CustomerID, CustomerName), get_ord
 
 % Base Case is: until no more orders to process increase the orderID by one and match
 get_orders(CustomerID, OrderID, [Order|T]) :- 
-order(CustomerID, OrderID , Items), Order = order(CustomerID, OrderID, Items), 
-NextOrderID is OrderID + 1, get_orders(CustomerID, NextOrderID, T).
-get_orders(_, _ , []).
+    order(CustomerID, OrderID , Items), Order = order(CustomerID, OrderID, Items), 
+    NextOrderID is OrderID + 1, get_orders(CustomerID, NextOrderID, T).
+get_orders(_, _ , []):- !.
 
-% -----------------------------------------------------
+%----------------------------------------------------------------------
 % 2- Get the number of orders of a specific customer given customer id.
+
+% Using the predicate 1 to get the orders list of the given customer name
+countOrdersOfCustomer(CustomerName, Count):- list_orders(CustomerName, Orders), count_Orders_helper(Orders, Count).
+% Get the length of the returned list of orders
+count_Orders_helper([], 0):- !.
+count_Orders_helper([_|T], Count):- 
+    count_Orders_helper(T, Temp), 
+    Count is Temp + 1.
+    
+%----------------------------------------------------------------------
