@@ -22,3 +22,51 @@ count_Orders_helper([_|T], Count):-
     Count is Temp + 1.
     
 %----------------------------------------------------------------------
+
+% NOUR ----------------------------------------------------------------
+
+% 6. Given the item name or company name, determine whether we need to boycott or not.
+isBoycott(X) :-
+    boycott_company(X, _);
+    item(X, Y, _),
+    boycott_company(Y, _).
+
+
+% 7. Given the company name or an item name, find the justification why you need to boycott this company/item.
+whyToBoycott(X, Y) :-
+    boycott_company(X, Y);
+    item(X, Z, _),
+    boycott_company(Z, Y).
+
+    
+% 8. Given an username and order ID, remove all the boycott items from this order.
+removeBoycottItems([], []).
+
+removeBoycottItems([X|Y], NewList) :-
+    isBoycott(X),
+    removeBoycottItems(Y, NewList).
+
+removeBoycottItems([X|Y], [X|NewList]) :-
+    removeBoycottItems(Y, NewList).
+
+removeBoycottItemsFromAnOrder(X, Y, NewList) :-
+    customer(Z, X),
+    order(Z, Y, List),
+    removeBoycottItems(List, NewList).
+
+
+% 9. Given an username and order ID, update the order such that all boycott items are replaced by an alternative i/f e/xists.
+replaceBoycottItems([], []).
+
+replaceBoycottItems([X|Y], [Z|NewList]) :-
+    isBoycott(X),
+    alternative(X, Z),
+    replaceBoycottItems(Y, NewList).
+
+replaceBoycottItems([X|Y], [X|NewList]) :-
+    replaceBoycottItems(Y, NewList).
+
+replaceBoycottItemsFromAnOrder(X, Y, NewList) :-
+    customer(Z, X),
+    order(Z, Y, List),
+    replaceBoycottItems(List, NewList).
