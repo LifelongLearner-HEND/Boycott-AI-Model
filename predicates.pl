@@ -1,5 +1,5 @@
 :- consult('data.pl').
-% 1- List all orders of a specific customer (as a list).
+% 1. List all orders of a specific customer (as a list).
 
 % Find the ID corresponding to the given customer and assign the first order ID to 1
 list_orders(CustomerName, Orders) :- customer(CustomerID, CustomerName), get_orders(CustomerID, 1 ,Orders).
@@ -11,7 +11,7 @@ get_orders(CustomerID, OrderID, [Order|T]) :-
 get_orders(_, _ , []):- !.
 
 %----------------------------------------------------------------------
-% 2- Get the number of orders of a specific customer given customer id.
+% 2. Get the number of orders of a specific customer given customer id.
 
 % Using the predicate 1 to get the orders list of the given customer name
 countOrdersOfCustomer(CustomerName, Count):- list_orders(CustomerName, Orders), count_Orders_helper(Orders, Count).
@@ -70,3 +70,15 @@ replaceBoycottItemsFromAnOrder(X, Y, NewList) :-
     customer(Z, X),
     order(Z, Y, List),
     replaceBoycottItems(List, NewList).
+
+%----------------------------------------------------------------------
+% 12. Bonus 
+
+:- dynamic item/3.
+% Add Item 
+add_item(Name, Manufacturer, Price):- 
+    assert(item(Name, Manufacturer, Price)).
+
+% Remove Item
+remove_item(Name, Manufacturer, Price):-
+    retract(item(Name, Manufacturer, Price)).
