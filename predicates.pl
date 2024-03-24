@@ -153,3 +153,16 @@ add_company(CompanyName, Justification):-
 % Remove Company
 remove_company(CompanyName, Justification):-
     retract(boycott_company(CompanyName, Justification)).
+
+% Add alternative
+:- dynamic(alternative/2).
+add_alternative(ItemName, AlternativeItem):-
+    item(ItemName,_,_),
+    item(AlternativeItem,_,_),
+    assert(alternative(ItemName, AlternativeItem)).
+
+% Remove alternative
+remove_alternative(ItemName, AlternativeItem):-
+    item(ItemName,_,_),
+    item(AlternativeItem,_,_),
+    retract(alternative(ItemName, AlternativeItem)).
