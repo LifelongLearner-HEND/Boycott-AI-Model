@@ -78,5 +78,16 @@ Given data file that includes facts about cutomers, orders, items and boycott co
 
 ### 12. Insert/Remove item, alternative and new boycott company to/from the knowledge base
 ```prolog
-?- add_item(item name, Alternative, quantity).
+?- add_item(item name, Alternative, price).
 ```
+
+
+## Dependencies 
+1. Upload the data.pl file and predicates file.
+2. query using SWI prolog tool or any online IDE.
+No external libraries are needed.
+
+
+## Contributing
+Contributions to this project are welcome. Feel free to fork the repository and create pull requests for improvements or additional features.
+
