@@ -84,10 +84,15 @@ Given data file that includes facts about cutomers, orders, items and boycott co
 
 ## Dependencies 
 1. Upload the data.pl file and predicates file.
-2. query using SWI prolog tool or any online IDE.
-No external libraries are needed.
+2. Query using SWI prolog tool or any online IDE.
+No external libraries are required.
 
 
 ## Contributing
 Contributions to this project are welcome. Feel free to fork the repository and create pull requests for improvements or additional features.
 
+
+## Contributers
+- [Hend Ahmed](https://github.com/LifelongLearner-HEND)
+- [Nour Wael](https://github.com/nourelshaer)
+- [Abd-El Rahman Fawzy](https://github.com/AbdEl-Rahman-Fawzy)
